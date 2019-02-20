@@ -7,8 +7,8 @@
 
 #include "../metric_base.h"
 
-#include <center.h>
-#include <theobald_rmsd.h>
+template<typename... Args> void inplace_center_and_trace_atom_major(Args&&...) {}
+template<typename... Args> float msd_atom_major(Args&&...) {}
 
 #ifdef USE_OPENMP
 #include <omp.h>

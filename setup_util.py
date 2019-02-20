@@ -203,12 +203,14 @@ class get_pybind_include(object):
                    setuptools_temp_egg(),
                    )
         for m in methods:
+            print(m)
             if os.path.exists(os.path.join(m, 'pybind11', 'pybind11.h')):
                 return m
         return ''
 
     def __str__(self):
         result = self.search_pybind11_headers()
+        return "/gpfs/projects/bsc72/lib/site-packages-cte/pybind_repo/include/"
         if not result:
             raise RuntimeError('pybind11 headers not found')
-        return result
+        # return result

@@ -115,13 +115,14 @@ def extensions():
         Extension('pyemma.coordinates.clustering._ext',
                   sources=['pyemma/coordinates/clustering/src/clustering_module.cpp'],
                   include_dirs=[
-                      mdtraj.capi()['include_dir'],
+                      # mdtraj.capi()['include_dir'],
                       pybind_inc,
                       'pyemma/coordinates/clustering/include',
                   ],
                   language='c++',
-                  libraries=[lib_prefix+'theobald'],
-                  library_dirs=[mdtraj.capi()['lib_dir']],
+                  # libraries=[lib_prefix+'theobald'],
+                  #libraries = [],
+                  #library_dirs=[mdtraj.capi()['lib_dir']],
                   extra_compile_args=common_cflags)
 
     covar_module = \
@@ -412,16 +413,17 @@ else:
         metadata['setup_requires'] += ['cython>=0.22']
 
         # init submodules
-        import subprocess
-        modules = []
-        cmd = "git submodule update --init {mod}"
-        for m in modules:
-            subprocess.check_call(cmd.format(mod=m).split(' '))
+        # import subprocess
+        # modules = []
+        # cmd = "git submodule update --init {mod}"
+        # for m in modules:
+        #     subprocess.check_call(cmd.format(mod=m).split(' '))
 
     # only require numpy and extensions in case of building/installing
     metadata['ext_modules'] = lazy_cythonize(callback=extensions)
     # packages are found if their folder contains an __init__.py,
     metadata['packages'] = find_packages()
 
+metadata['setup_requires'] = []
 if __name__ == '__main__':
     setup(**metadata)
